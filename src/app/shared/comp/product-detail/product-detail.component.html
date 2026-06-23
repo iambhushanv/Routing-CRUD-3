@@ -1,0 +1,14 @@
+
+<div class="card" *ngIf="productObj">
+    <div class="card-body">
+        <p>The product is {{productObj.pname}} and its status is {{productObj.pstatus}}</p>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <button
+        (click)="redirectToEdit()"
+         class="btn btn-sm btn-outline-primary">Edit</button>
+        <button 
+         (click)="onRemove()"
+        class="btn btn-sm btn-outline-danger">Remove</button>
+    </div>
+</div>
