@@ -1,0 +1,181 @@
+<mat-card class="mb-5">
+    <mat-card-content>
+        <h3 class="font-weight-bold">{{isInEditMode? 'Update User': 'Add User'}}</h3>
+        <form [formGroup]="userForm" (ngSubmit)="onAddUser()">
+            <div class="form-group">
+                <label for="userName">User Name*</label>
+                <input formControlName="userName" id="userName" type="text" class="form-control">
+                <strong class="text-danger"
+                    *ngIf="formControls['userName'].touched && formControls['userName'].hasError('required')">
+                    User Name is required field.
+                </strong>
+            </div>
+            <div class="form-group">
+                <label for="userRole">User Role*</label>
+                <select formControlName="userRole" id="userRole" type="text" class="form-control">
+                    <option value="Candidate">Candidate</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <strong class="text-danger"
+                    *ngIf="formControls['userRole'].touched && formControls['userRole'].hasError('required')">
+                    User Role is required field.
+                </strong>
+            </div>
+            <div class="form-group">
+                <label for="profileDescription">Profile Description*</label>
+                <textarea rows="4" formControlName="profileDescription" id="profileDescription" type="text"
+                    class="form-control"></textarea>
+                <strong class="text-danger"
+                    *ngIf="formControls['profileDescription'].touched && formControls['profileDescription'].hasError('required')">
+                    Profile Description is required field.
+                </strong>
+            </div>
+            <div class="form-group">
+                <label for="profileImage">Profile Image*</label>
+                <input formControlName="profileImage" id="profileImage" type="text" class="form-control">
+                <strong class="text-danger"
+                    *ngIf="formControls['profileImage'].touched && formControls['profileImage'].hasError('required')">
+                    Profile Image is required field.
+                </strong>
+            </div>
+            <div class="form-group">
+                <label for="experienceYears">Experience Years*</label>
+                <select formControlName="experienceYears" id="experienceYears" type="text" class="form-control">
+                    <option value="1 to 3 years">1 to 3 Years</option>
+                    <option value="3 to 5 years">3 to 5 Years</option>
+                    <option value="5 to 7 years">5 to 7 Years</option>
+                    <option value="10+ years">10+ Years</option>
+                </select>
+                <strong class="text-danger"
+                    *ngIf="formControls['experienceYears'].touched && formControls['experienceYears'].hasError('required')">
+                    Experience Years is required field.
+                </strong>
+            </div>
+
+            <div formArrayName="skills">
+                <h4 class="font-weight-bold">Skills*</h4>
+                <div class="row" *ngFor="let skill of skillsArr.controls; let i = index">
+                    <div class="col-10">
+                        <div class="form-group">
+                            <input [id]="'skills' + i" [formControlName]="i" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <button
+                         [disabled]="editUser.userRole === 'Candidate'" 
+                         class="btn btn-sm btn-danger" type="button">Remove</button>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <button
+                      [disabled]="formControls['skills'].invalid" (click)="addSkillControl()"
+                            class="btn btn-sm btn-primary" color="primary" type="button"
+                      [disabled]="editUser.userRole === 'Candidate'" 
+                            >Add Skills</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="isActive">Is Active*</label>
+                <select formControlName="isActive" id="isActive" type="text" class="form-control">
+                    <option [ngValue]="true">Yes</option>
+                    <option [ngValue]="false">No</option>
+                </select>
+                <strong class="text-danger"
+                    *ngIf="formControls['isActive'].touched && formControls['isActive'].hasError('required')">
+                    Is Active is required field.
+                </strong>
+            </div>
+
+            <div formGroupName="address">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="font-weight-bold">Current Address</h4>
+                        <div formGroupName="current">
+                            <div class="form-group">
+                                <label for="c-country">Country</label>
+                                <input formControlName="country" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="c-state">State*</label>
+                                <input formControlName="state" type="text" class="form-control">
+                                <strong class="text-danger" *ngIf="userForm.get('address.current.state')?.touched && 
+                                                 userForm.get('address.current.state')?.hasError('required')">
+                                    State is required field.
+                                </strong>
+                            </div>
+                            <div class="form-group">
+                                <label for="c-city">City*</label>
+                                <input formControlName="city" type="text" class="form-control">
+                               <strong class="text-danger" *ngIf="userForm.get('address.current.city')?.touched && 
+                                                 userForm.get('address.current.city')?.hasError('required')">
+                                    City is required field.
+                                </strong>
+                            </div>
+                            <div class="form-group">
+                                <label for="c-zipcode">Zipcode*</label>
+                                <input formControlName="zipcode" type="text" class="form-control">
+                                <strong class="text-danger" *ngIf="userForm.get('address.current.zipcode')?.touched && 
+                                                 userForm.get('address.current.zipcode')?.hasError('required')">
+                                    Zipcode is required field.
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="font-weight-bold">Permanent Address</h4>
+                        <div formGroupName="permanent">
+                            <div class="form-group">
+                                <label for="p-country">Country</label>
+                                <input formControlName="country" type="text" class="form-control">                               
+                            </div>
+                            <div class="form-group">
+                                <label for="p-state">State*</label>
+                                <input formControlName="state" type="text" class="form-control">
+                                <strong class="text-danger" *ngIf="userForm.get('address.permanent.state')?.touched && 
+                                                 userForm.get('address.permanent.state')?.hasError('required')">
+                                    State is required field.
+                                </strong>
+                            </div>
+                            <div class="form-group">
+                                <label for="p-city">City*</label>
+                                <input formControlName="city" type="text" class="form-control">
+                               <strong class="text-danger" *ngIf="userForm.get('address.permanent.city')?.touched && 
+                                                 userForm.get('address.permanent.city')?.hasError('required')">
+                                    City is required field.
+                                </strong>
+                            </div>
+                            <div class="form-group">
+                                <label for="p-zipcode">Zipcode*</label>
+                                <input formControlName="zipcode" type="text" class="form-control">
+                                 <strong class="text-danger" *ngIf="userForm.get('address.permanent.zipcode')?.touched && 
+                                                 userForm.get('address.permanent.zipcode')?.hasError('required')">
+                                    Zipcode is required field.
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="isAddSame">
+                            <input type="checkbox" id="isAddSame" formControlName="isAddSame"> Current and Permanent
+                            address
+                            are same.
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button *ngIf="!isInEditMode" mat-raised-button color="primary" type="submit">Add User</button>
+            <button
+            [disabled]="editUser.userRole === 'Candidate'"
+            (click)="onUpdate()"
+             *ngIf="isInEditMode" mat-raised-button color="warn" type="button">Update User</button>
+        </form>
+    </mat-card-content>
+</mat-card>

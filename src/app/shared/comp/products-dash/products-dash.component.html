@@ -1,11 +1,12 @@
 <div class="row">
     <div class="col-12 text-right mt-4">
-        <button routerLink="addProduct" class="btn btn-outline-primary">Add Product</button>
+        <button routerLink="addProduct" class="btn btn-primary mb-4">Add Product</button>
     </div>
 
     <div class="col-md-4" *ngIf="getProductsArr.length > 0; else noProducts">
         <ul class="list-group">
             <li class="list-group-item"
+                routerLinkActive="active"
                 [routerLink]="[product.pid]" 
                 [queryParams]="{cr : product.canReturn}"
              *ngFor="let product of getProductsArr; trackBy: trackByFun">
@@ -27,6 +28,6 @@
     </ng-template>
 
     <div class="col-md-8">
-        Product Details
+       <router-outlet></router-outlet>
     </div>
 </div>

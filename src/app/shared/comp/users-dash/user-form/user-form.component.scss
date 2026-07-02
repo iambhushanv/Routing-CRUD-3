@@ -1,0 +1,11 @@
+
+form{
+
+    label{
+        font-weight: 700;
+    }
+    .form-control.ng-invalid.ng-touched, 
+    .form-control.ng-invalid.ng-dirty{
+        border: 2px solid red;
+    }
+}

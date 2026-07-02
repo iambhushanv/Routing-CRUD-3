@@ -1,1 +1,35 @@
-<p>users-dash works!</p>
+<div class="row">
+    <div class="col-md-12 text-right">
+        <button  
+        routerLink="addUser"
+        mat-raised-button color="primary" class="mb-4" type="button">Add User</button>
+    </div>
+   
+        <div class="col-md-4">
+            <ul class="list-group" *ngIf="getUserArr.length > 0; else noUsers">
+                <li
+                [routerLink]="[user.userId]"
+                routerLinkActive="active"
+                [queryParams]="{ur : user.userRole}"
+                 class="list-group-item" *ngFor="let user of getUserArr; trackBy: trackByFun">
+                    {{user.userName}}
+                    <small class="badge"
+                    [ngClass]="{
+                        'badge-success' : user.isActive,
+                        'badge-warning' : !user.isActive
+                    }"
+                    >
+                        {{user.isActive? 'Yes': 'No'}}
+                    </small>
+                </li>
+            </ul>
+            <ng-template #noUsers> 
+                <p class="alert alert-info">
+                    No Users !!!
+                </p>
+            </ng-template>
+        </div>
+        <div class="col-md-8">
+        <router-outlet></router-outlet>
+        </div>
+</div>

@@ -7,49 +7,69 @@ import { PageNotFoundComponent } from './shared/comp/page-not-found/page-not-fou
 import { FairsDashComponent } from './shared/comp/fairs-dash/fairs-dash.component';
 import { ProductFormComponent } from './shared/comp/product-form/product-form.component';
 import { ProductDetailComponent } from './shared/comp/product-detail/product-detail.component';
+import { UserFormComponent } from './shared/comp/users-dash/user-form/user-form.component';
+import { UserDetailComponent } from './shared/comp/users-dash/user-detail/user-detail.component';
 
 const routes: Routes = [
-  
+
   {
-    path : 'home',
-    component : HomeDashComponent
+    path: 'home',
+    component: HomeDashComponent
   },
-    {
-    path : '',
-    redirectTo : 'home',
-    pathMatch : 'full'
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
-   {
-    path : 'products',
-    component : ProductsDashComponent
+  {
+    path: 'products',
+    component: ProductsDashComponent,
+    children: [
+      {
+        path: 'addProduct',
+        component: ProductFormComponent
+      },
+      {
+        path: ':id',
+        component: ProductDetailComponent
+      },
+      {
+        path: ':id/edit',
+        component: ProductFormComponent
+      }
+    ]
   },
-   {
-    path : 'products/addProduct',
-    component : ProductFormComponent
+
+  {
+    path: 'fairs',
+    component: FairsDashComponent
   },
-   {
-    path : 'products/:id',
-    component : ProductDetailComponent
+  {
+    path: 'user',
+    component: UsersDashComponent,
+    children: [
+      {
+        path: 'addUser',
+        component: UserFormComponent
+      },
+      {
+        path: ':id',
+        component: UserDetailComponent
+      },
+      {
+        path: ':id/edit',
+        component: UserFormComponent
+      }
+    ]
   },
-   {
-    path : 'products/:id/edit',
-    component : ProductFormComponent
+
+  {
+    path: 'Page-Not-Found',
+    component: PageNotFoundComponent
   },
-   {
-    path : 'fairs',
-    component : FairsDashComponent
-  },
-    {
-    path : 'user',
-    component : UsersDashComponent
-  },
-    {
-    path : 'Page-Not-Found',
-    component : PageNotFoundComponent
-  },
-   {
-    path : '**',
-    redirectTo : 'Page-Not-Found'
+  {
+    path: '**',
+    redirectTo: 'Page-Not-Found'
   }
 ];
 

@@ -19,6 +19,8 @@ import { PageNotFoundComponent } from './shared/comp/page-not-found/page-not-fou
 import { ProductFormComponent } from './shared/comp/product-form/product-form.component';
 import { ProductDetailComponent } from './shared/comp/product-detail/product-detail.component';
 import { GetConfirmComponent } from './shared/comp/product-detail/get-confirm/get-confirm.component';
+import { UserFormComponent } from './shared/comp/users-dash/user-form/user-form.component';
+import { UserDetailComponent } from './shared/comp/users-dash/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { GetConfirmComponent } from './shared/comp/product-detail/get-confirm/ge
     PageNotFoundComponent,
     ProductFormComponent,
     ProductDetailComponent,
-    GetConfirmComponent
+    GetConfirmComponent,
+    UserFormComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
