@@ -166,12 +166,18 @@ export class UserFormComponent implements OnInit {
         .subscribe({
           next: res => {
             this._snackBar.openSnackBar(res.msg)
-            this._router.navigate(['/user'])
+            this._router.navigate(['/user', updateObj.userId],
+              {queryParams : { ur : updateObj.userRole}}
+            )
           },
           error: err => {
             this._snackBar.openSnackBar(err.msg)
           }
         })
     }
+  }
+
+  onSkillRemove(i: number){
+    this.skillsArr.removeAt(i)
   }
 }

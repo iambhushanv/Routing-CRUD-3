@@ -61,18 +61,24 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <button
+                        <button *ngIf="i > 0"
+                        (click)="onSkillRemove(i)"
                          [disabled]="editUser.userRole === 'Candidate'" 
                          class="btn btn-sm btn-danger" type="button">Remove</button>
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-12">
-                        <button
+                        <button *ngIf="skillsArr.length < 5 else noSkill"
                       [disabled]="formControls['skills'].invalid" (click)="addSkillControl()"
                             class="btn btn-sm btn-primary" color="primary" type="button"
                       [disabled]="editUser.userRole === 'Candidate'" 
                             >Add Skills</button>
+                            <ng-template #noSkill>
+                                <p class="alert alert-info">
+                                    You can add only 5 skills !!!
+                                </p>
+                            </ng-template>
                     </div>
                 </div>
             </div>
